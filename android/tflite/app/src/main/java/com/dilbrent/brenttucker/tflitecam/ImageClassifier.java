@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.example.android.tflitecamerademo;
+package com.dilbrent.brenttucker.tflitecam;
 
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -40,7 +40,7 @@ import org.tensorflow.lite.Interpreter;
 public class ImageClassifier {
 
   /** Tag for the {@link Log}. */
-  private static final String TAG = "TfLiteCameraDemo";
+  private static final String TAG = "BTtfCamDemo";
 
   /** Name of the model file stored in Assets. */
   private static final String MODEL_PATH = "graph.lite";

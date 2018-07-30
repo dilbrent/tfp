@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.example.android.tflitecamerademo;
+package com.dilbrent.brenttucker.tflitecam;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -70,7 +70,7 @@ public class Camera2BasicFragment extends Fragment
     implements FragmentCompat.OnRequestPermissionsResultCallback {
 
   /** Tag for the {@link Log}. */
-  private static final String TAG = "TfLiteCameraDemo";
+  private static final String TAG = "BTtfCamDemo";
 
   private static final String FRAGMENT_DIALOG = "dialog";
 
