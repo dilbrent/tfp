@@ -25,4 +25,7 @@ toco \
 cp tf_files/rounded_graph.pb ~/tensorflow/tensorflow/examples/android/assets/tensorflow_inception_graph.pb
 cp tf_files/retrained_labels.txt ~/tensorflow/tensorflow/examples/android/assets/imagenet_comp_graph_label_strings.txt 
 
+cp tf_files/optimized_graph.lite android/tflite/app/src/main/assets/graph.lite
+cp tf_files/retrained_labels.txt android/tflite/app/src/main/assets/labels.txt
+
 ls -al ~/tensorflow/tensorflow/examples/android/assets
