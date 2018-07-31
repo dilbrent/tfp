@@ -19,28 +19,30 @@
 
     <com.dilbrent.brenttucker.tflitecam.AutoFitTextureView
         android:id="@+id/texture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="574dp"
+        android:layout_height="361dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="11dp" />
 
     <FrameLayout
         android:id="@+id/control"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="324dp"
+        android:layout_height="97dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="1dp"
-        android:layout_toRightOf="@id/texture"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="21dp"
         android:background="@color/control_background"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="2dp">
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:padding="10dp"
             android:textColor="#FFF"
             android:textSize="20sp"
             android:textStyle="bold" />
