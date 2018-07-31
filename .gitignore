@@ -8,7 +8,8 @@ android.iml
 android/assets/*
 lastpic/
 
-
+video/frames/
+video/*.mp4
 android/tflite/app/build/
 android/tflite/gradle/
 tf_files/.empty

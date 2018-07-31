@@ -17,3 +17,6 @@ python3 -m scripts.retrain \
   --image_dir=tf_files/training_pics
 
 ./doTests.sh
+
+./prepTFLite.sh
+
