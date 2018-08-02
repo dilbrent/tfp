@@ -1,14 +1,19 @@
 blinds
 chicken broth swanson
+coffee empty
+coffee full
+coffee partial
 diet coke
 diet coke empty
 foldingdoor
 glasses
+hand
 jello raspberry
 lego bb8
 lego dalek
 lego r2d2
 lego tardis
+table top
 tomatoes canned petite cut
 wall
 zone perfect fudge graham bars

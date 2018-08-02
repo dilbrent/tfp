@@ -403,13 +403,13 @@ public class Camera2BasicFragment extends Fragment
           maxPreviewHeight = displaySize.x;
         }
 
-        //if (maxPreviewWidth > MAX_PREVIEW_WIDTH) {
-        //  maxPreviewWidth = MAX_PREVIEW_WIDTH;
-        //}
+        if (maxPreviewWidth > MAX_PREVIEW_WIDTH) {
+          maxPreviewWidth = MAX_PREVIEW_WIDTH;
+        }
 
-        //if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
-        //  maxPreviewHeight = MAX_PREVIEW_HEIGHT;
-        //}
+        if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
+          maxPreviewHeight = MAX_PREVIEW_HEIGHT;
+        }
 
         previewSize =
             chooseOptimalSize(
