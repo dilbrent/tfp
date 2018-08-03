@@ -209,8 +209,9 @@ public class ImageClassifier {
     private float lastfirsttime=SystemClock.uptimeMillis();
     private int minok=90; // probably need to make this smarter
     private float timeatmin=0; // millis since % was at or above minok%
-    float minwait=10000;//5 seconds min between audio
-    float lastaudio=0;
+    private int mintalkconfirm=2; // minimum seconds at timeatmin before speaking the text (note this is seconds, not millis)
+    private float minwait=5000; //5 seconds min between audio (note this is in millis)
+    private float lastaudio=0;
 
     /** Prints top-K labels, to be shown in UI as the results. */
     private String printTopKLabels(Context context) {
@@ -244,8 +245,8 @@ public class ImageClassifier {
                 float timesincemin=0;
                 if (timeatmin>0)
                     timesincemin=(curtime-timeatmin)/1000;
-                if (timesincemin>=3) {
-                    playAudio(context,lastkey+".mp3");
+                if (timesincemin>=mintalkconfirm) {
+                    playAudio(context,"audio/"+lastkey+".mp3");
                 }
                 textToShow = String.format("%s: %3.0f%% [%.0fs/%.0fs]\n",label.getKey(),label.getValue()*100,totaltime,timesincemin) + textToShow;
             }
@@ -261,7 +262,7 @@ public class ImageClassifier {
         float curtime=SystemClock.uptimeMillis();
         if (context!=null && (curtime-minwait>lastaudio)) {
             try {
-                AssetFileDescriptor afd = context.getAssets().openFd(file);
+                AssetFileDescriptor afd = context.getAssets().openFd(file.replace(' ','_'));
                 lastaudio=curtime; // if exception thrown we don't want to reset this yet
                 MediaPlayer player = new MediaPlayer();
                 player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
