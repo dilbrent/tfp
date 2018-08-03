@@ -16,8 +16,10 @@ limitations under the License.
 package com.dilbrent.brenttucker.tflitecam;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.util.Log;
 import java.io.BufferedReader;
@@ -106,7 +108,7 @@ public class ImageClassifier {
     }
 
     /** Classifies a frame from the preview stream. */
-    String classifyFrame(Bitmap bitmap) {
+    String classifyFrame(Bitmap bitmap,Context context) {
         if (tflite == null) {
             Log.e(TAG, "Image classifier has not been initialized; Skipped.");
             return "Uninitialized Classifier.";
@@ -122,7 +124,7 @@ public class ImageClassifier {
         applyFilter();
 
         // print the results
-        String textToShow = printTopKLabels();
+        String textToShow = printTopKLabels(context);
         //textToShow = Long.toString(endTime - startTime) + "ms" + textToShow;
         return textToShow;
     }
@@ -207,9 +209,11 @@ public class ImageClassifier {
     private float lastfirsttime=SystemClock.uptimeMillis();
     private int minok=90; // probably need to make this smarter
     private float timeatmin=0; // millis since % was at or above minok%
+    float minwait=10000;//5 seconds min between audio
+    float lastaudio=0;
 
     /** Prints top-K labels, to be shown in UI as the results. */
-    private String printTopKLabels() {
+    private String printTopKLabels(Context context) {
         for (int i = 0; i < labelList.size(); ++i) {
             sortedLabels.add(
                     new AbstractMap.SimpleEntry<>(labelList.get(i), labelProbArray[0][i]));
@@ -227,6 +231,7 @@ public class ImageClassifier {
             {
                 if (lastkey!=label.getKey()) {
                     lastfirsttime=curtime;
+                    lastaudio=0; // we reset this since the minwait value only applies to repeating the current object
                     lastkey = label.getKey();
                 }
                 lastvalue=label.getValue();
@@ -239,11 +244,34 @@ public class ImageClassifier {
                 float timesincemin=0;
                 if (timeatmin>0)
                     timesincemin=(curtime-timeatmin)/1000;
+                if (timesincemin>=3) {
+                    playAudio(context,lastkey+".mp3");
+                }
                 textToShow = String.format("%s: %3.0f%% [%.0fs/%.0fs]\n",label.getKey(),label.getValue()*100,totaltime,timesincemin) + textToShow;
             }
             else
                 textToShow = String.format("%s (%.0f%%)\n",label.getKey(),label.getValue()*100) + textToShow;
         }
         return textToShow;
+    }
+
+
+    void playAudio(Context context, String file)
+    {
+        float curtime=SystemClock.uptimeMillis();
+        if (context!=null && (curtime-minwait>lastaudio)) {
+            try {
+                AssetFileDescriptor afd = context.getAssets().openFd(file);
+                lastaudio=curtime; // if exception thrown we don't want to reset this yet
+                MediaPlayer player = new MediaPlayer();
+                player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                player.prepare();
+                player.start();
+            }
+            catch(Exception ex)
+            {
+                Log.d("failure","loading audio "+file, ex);
+            }
+        }
     }
 }

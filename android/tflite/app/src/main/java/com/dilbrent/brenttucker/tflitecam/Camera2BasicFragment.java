@@ -655,12 +655,12 @@ public class Camera2BasicFragment extends Fragment
   /** Classifies a frame from the preview stream. */
   private void classifyFrame() {
     if (classifier == null || getActivity() == null || cameraDevice == null) {
-      showToast("Uninitialized Classifier or invalid context.");
+      showToast("Initializing...");
       return;
     }
     Bitmap bitmap =
         textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
-    String textToShow = classifier.classifyFrame(bitmap);
+    String textToShow = classifier.classifyFrame(bitmap,getContext());
     bitmap.recycle();
     showToast(textToShow);
   }
