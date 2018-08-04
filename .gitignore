@@ -11,6 +11,7 @@ lastpic/
 video/frames/
 video/*.mp4
 android/tflite/app/build/
+android/tflite/app/release/
 android/tflite/gradle/
 tf_files/.empty
 tf_files/bottlenecks/
