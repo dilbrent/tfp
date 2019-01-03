@@ -251,7 +251,7 @@ public class ImageClassifier {
                 textToShow = String.format("%s: %3.0f%% [%.0fs/%.0fs]\n",label.getKey(),label.getValue()*100,totaltime,timesincemin) + textToShow;
             }
             else
-                textToShow = String.format("%s (%.0f%%)\n",label.getKey(),label.getValue()*100) + textToShow;
+                textToShow = String.format("%s (%.0f%%)\n",label.getKey(),label.getValuradb rebooe()*100) + textToShow;
         }
         return textToShow;
     }
